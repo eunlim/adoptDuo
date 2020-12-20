@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d] %-5p: %c - %m%n" />
+<!-- 			<param name="ConversionPattern" value="[%d] %-5p at %C{3}.%M(%13F:%L) %3x - %m%n" /> -->
+<!-- 			<param name="ConversionPattern" value="%-5p at %C{3}.%M(%13F:%L) %3x - %m%n" /> -->
+		</layout>
+		<!-- org.springframework.web.servlet.mvc 를 거치는 정적파일(JS, CSS..)는 로그 출력을 하지 않게 설정 -->
+		<filter class="org.apache.log4j.varia.StringMatchFilter">
+			<param name="StringToMatch" value="/resources/" />
+			<param name="AcceptOnMatch" value="false" />
+		</filter>
+	</appender>
+	
+	<!-- 
+	additivity="false" : 로그 중복출력 False
+ -->
+	
+	<!-- log4jdbc option  log the jdbc results as a table --> 
+	<logger name="jdbc.resultsettable" additivity="false"> 
+		<level value="off" /> 
+	</logger>
+	<logger name="jdbc.resultset"> 
+		<level value="off" /> 
+	</logger>
+	<logger name="jdbc.audit"> 
+		<level value="off" /> 
+	</logger>
+	<logger name="jdbc.sqltiming"> 
+		<level value="off" /> 
+	</logger>
+	
+	<!-- DAO 레이어 로그용 -->
+	<logger name="org.project.signt.dao" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="console" />
+	</logger>
+	
+	
+	<!-- Root Logger -->
+	<root>
+		<priority value="info" />
+		<appender-ref ref="console" />
+	</root>
+	
+</log4j:configuration>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- Maria DB, 오라클 와 Spring 연결 -->
+	<!-- 
+ 	<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+		<beans:property name="url" value="jdbc:mariadb://192.168.0.51:13306/hwasun" />
+		<beans:property name="username" value="WATER_PIPE" />
+		<beans:property name="password" value="WATER_PIPE" />
+	</beans:bean> 
+	-->
+	
+	
+	<beans:bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+       	<beans:property name="url" value="jdbc:oracle:thin:@219.248.82.154:1521:orcl"/>
+       	<beans:property name="username" value="DANGJIN_USER"/>
+        <beans:property name="password" value="DANGJIN_USER"/>
+        <beans:property name="initialSize" value="2" />
+        <beans:property name="maxActive" value="100" />
+        <beans:property name="maxIdle" value="-1" />
+        <beans:property name="maxWait" value="-1" />
+        <beans:property name="poolPreparedStatements" value="true" />
+        <beans:property name="maxOpenPreparedStatements" value="100" /> 		
+        <beans:property name="removeAbandoned" value="true" />
+        <beans:property name="removeAbandonedTimeout" value="60" />
+        <beans:property name="logAbandoned" value="true" />		
+        <beans:property name="testOnBorrow" value="true"/>
+        <beans:property name="validationQuery" value="select 0 from dual"/>
+    </beans:bean>
+	
+	<beans:bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+        <beans:constructor-arg ref="dataSourceSpied" />
+        <beans:property name="logFormatter">
+            <beans:bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+                <beans:property name="loggingType" value="MULTI_LINE" />
+                <beans:property name="sqlPrefix" value="SQL :         " />
+            </beans:bean>
+        </beans:property>
+ 	</beans:bean>	
+ 	
+ 	<!-- MyBatis(Maria DBm 오라클)와 Spring 연결 -->
+	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" /> 
+		<beans:property name="mapperLocations" value="classpath*:sql/*/**/*Mapper.xml" />
+		<beans:property name="configLocation" value="classpath:sql/config/mybatis-config-common.xml" />
+	</beans:bean>
+	
+	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<beans:constructor-arg index="0" ref="sqlSessionFactory" />
+	</beans:bean>
+	
+	<!-- transaction 관련 설정 -->
+	<beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <beans:property name="dataSource" ref="dataSource"/>
+    </beans:bean>
+    <!-- 트랜잭션 관련 어노테이션을 자동 인식하는 옵션 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>	
+	
+	
+	
+	
+	
+	
+	
+</beans:beans>

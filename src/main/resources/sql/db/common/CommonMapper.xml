@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.project.signt.dao.common.CommonDao">
+
+	
+	<select id="getLocation" parameterType="HashMap" resultType="HashMap">
+	 	SELECT IDX, EQIF_NAME, LOCATION_Y, LOCATION_X FROM EQUIPMENT_INFO
+		WHERE 1 = 1
+		AND EQIF_TYPE = 2
+		AND IDX <![CDATA[<]]> 20
+		<if test="IDX != null and IDX != ''">
+	    AND IDX = #{IDX}
+	    </if>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+</mapper>
