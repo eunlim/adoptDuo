@@ -24,7 +24,7 @@
 	
 	<beans:bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
        <beans:property name="driverClassName" value="org.mariadb.jdbc.Driver" />
-		<beans:property name="url" value="jdbc:mariadb://limy1118.cafe24.com:3306/limy1118" />
+		<beans:property name="url" value="jdbc:mariadb://signt.iptime.org:13306/limy1118" />
 		<beans:property name="username" value="limy1118" />
 		<beans:property name="password" value="dog7596@@" />
         <beans:property name="initialSize" value="2" />

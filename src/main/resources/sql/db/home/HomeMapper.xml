@@ -5,7 +5,7 @@
 	
 	
 	<select id="getUserInfo" parameterType="HashMap" resultType="HashMap">
-	 	SELECT * FROM USER
+	 	SELECT * FROM CODE_USER
 	</select>
 	
 	
