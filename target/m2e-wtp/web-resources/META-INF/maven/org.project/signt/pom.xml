@@ -164,21 +164,20 @@
 		
 
 		<!--  maria DB -->
-		<!-- 
 		<dependency>
 		    <groupId>org.mariadb.jdbc</groupId>
 		    <artifactId>mariadb-java-client</artifactId>
 		    <version>1.5.7</version>
 		</dependency>
-		-->
 		
 		<!-- 오라클 JDBC 드라이버 -->
+		<!-- 
 		<dependency>
 		    <groupId>com.oracle</groupId>
 		     <artifactId>ojdbc6</artifactId>
      		<version>12.1.0.2</version>
 		</dependency>
-		
+		 -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>
@@ -337,6 +336,14 @@
 		    <artifactId>jaxb-api</artifactId>
 		    <version>2.3.1</version>
 		</dependency>
+		
+		<dependency>
+		  <groupId>jakarta.activation</groupId>
+		  <artifactId>jakarta.activation-api</artifactId>
+		  <version>2.0.0</version>
+		</dependency>
+		
+		
 		       
 	</dependencies>
     <build>

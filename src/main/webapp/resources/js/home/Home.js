@@ -71,10 +71,20 @@ $(function() {
      
      // 파일 드롭 다운
      fileDropDown();
-	
 
-
-
+	$.ajax({
+        url : contextPath + "/test.do",
+        type : 'GET',
+        success : function(result) {// return이 없을경우 success는
+										// 실행되지 않는다 -> void일 경우
+     	  console.log(result)
+     	  
+     	  
+        },
+        error : function(result) {
+        	
+        }
+    });
 
 	
 });

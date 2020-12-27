@@ -4,6 +4,9 @@
 
 	
 	
+	<select id="getUserInfo" parameterType="HashMap" resultType="HashMap">
+	 	SELECT * FROM USER
+	</select>
 	
 	
 	
