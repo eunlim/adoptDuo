@@ -120,10 +120,25 @@ public class HomeController {
 	  public @ResponseBody HashMap<String, Object> testRestAPI(@RequestParam(required = true) HashMap<String, Object> param) {
 		  
 			HashMap<String, Object> test = new HashMap<String, Object>();
-			test.put("이름", "박수빈");
+		/*	test.put("이름", "박수빈");
 			test.put("성별", "남");
 			test.put("CurrentTime", LocalDateTime.now().toString());
-			test.put("aaa", homeService.getUserInfo(param));
+			test.put("aaa", homeService.getUserInfo(param));*/
+		  String id = "admin";
+		  String pw = "12345";
+		 
+		  param.put("id", id);
+		  param.put("pw", pw);
+		  
+		  if(homeService.getUserIdChk(param) == 0) {
+			  test.put("CHKID",1);
+		  }else if(homeService.getUserPwChk(param) == 0) {
+			  test.put("CHKPW",2);
+		  }else {
+			test.put("info", homeService.getUserInfo(param));
+		  }
+		  
+		  System.out.println("###test : "+test);
 		  
 	        return test;
 	  }

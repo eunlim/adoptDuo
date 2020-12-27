@@ -5,7 +5,11 @@ import java.util.HashMap;
 
 public interface HomeDao {
 
-	ArrayList<HashMap<String, Object>> getUserInfo(HashMap<String, Object> param);
+	HashMap<String, Object> getUserInfo(HashMap<String, Object> param);
+
+	int getUserIdChk(HashMap<String, Object> param);
+
+	int getUserPwChk(HashMap<String, Object> param);
 
 
 

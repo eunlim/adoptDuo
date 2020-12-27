@@ -17,10 +17,23 @@ public class HomeServiceImpl implements HomeService{
 	@Autowired
 	private SqlSession sqlSession;
 	
+
 	@Override
-	public ArrayList<HashMap<String, Object>> getUserInfo(HashMap<String, Object> param) {
+	public HashMap<String, Object> getUserInfo(HashMap<String, Object> param) {
 		 HomeDao dao = sqlSession.getMapper(HomeDao.class);
 		 return dao.getUserInfo(param);
+	}
+
+	@Override
+	public int getUserIdChk(HashMap<String, Object> param) {
+		 HomeDao dao = sqlSession.getMapper(HomeDao.class);
+		 return dao.getUserIdChk(param);
+	}
+
+	@Override
+	public int getUserPwChk(HashMap<String, Object> param) {
+		 HomeDao dao = sqlSession.getMapper(HomeDao.class);
+		 return dao.getUserPwChk(param);
 	}
 
 	

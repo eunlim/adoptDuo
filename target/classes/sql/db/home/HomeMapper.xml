@@ -5,10 +5,26 @@
 	
 	
 	<select id="getUserInfo" parameterType="HashMap" resultType="HashMap">
-	 	SELECT * FROM CODE_USER
+	 	SELECT 
+	 			* 
+	 	FROM CODE_USER 
+	 	WHERE USER_PW = #{pw}
+	 	AND   USER_ID = #{id}
 	</select>
 	
+	<select id="getUserIdChk" parameterType="HashMap" resultType="Integer">
+	 	SELECT 
+	 		   COUNT(*)
+	 	FROM  CODE_USER
+	 	WHERE USER_ID = #{id}
+	</select>
 	
-	
+	<select id="getUserPwChk" parameterType="HashMap" resultType="Integer">
+	 	SELECT 
+	 		   COUNT(*)
+	 	FROM  CODE_USER
+	 	WHERE USER_PW = #{pw}
+	 	AND   USER_ID = #{id}
+	</select>
 
 </mapper>
