@@ -8,23 +8,67 @@
 	 	SELECT 
 	 			* 
 	 	FROM CODE_USER 
-	 	WHERE USER_PW = #{pw}
-	 	AND   USER_ID = #{id}
+	 	WHERE USER_PW = #{USER_PW}
+	 	AND   USER_ID = #{USER_ID}
 	</select>
 	
 	<select id="getUserIdChk" parameterType="HashMap" resultType="Integer">
 	 	SELECT 
 	 		   COUNT(*)
 	 	FROM  CODE_USER
-	 	WHERE USER_ID = #{id}
+	 	WHERE USER_ID = #{USER_ID}
 	</select>
 	
 	<select id="getUserPwChk" parameterType="HashMap" resultType="Integer">
 	 	SELECT 
 	 		   COUNT(*)
 	 	FROM  CODE_USER
-	 	WHERE USER_PW = #{pw}
-	 	AND   USER_ID = #{id}
+	 	WHERE USER_PW = #{USER_PW}
+	 	AND   USER_ID = #{USER_ID}
+	</select>
+	
+	<!-- SIGN UP -->
+	<insert id="insertUser" parameterType="HashMap">
+		INSERT INTO CODE_USER
+				(
+				  IDX			-- 회원 INDEX
+				 ,USER_ID		-- 회원 ID
+				 ,USER_PW		-- 회원 PW
+				 ,USER_NAME		-- 회원 이름
+				 ,USER_PHONE 	-- 회원 폰번호
+				 ,USER_ADDR		-- 회원 주소
+				 ,USER_EMAIL	-- 회원 이메일
+				 )
+				VALUES(
+					(SELECT IFNULL(MAX(IDX)+1, 1) FROM CODE_USER CU) 
+				   ,#{USER_ID}
+				   ,#{USER_PW}
+				   ,#{USER_NAME}
+				   ,#{USER_PHONE}
+				   ,#{USER_ADDR}
+				   ,#{USER_EMAIL}
+					)
+	</insert>
+	
+	<!-- SEARCH INFO -->
+	<select id="searchInfo" parameterType="HashMap" resultType="HashMap">
+		SELECT 
+		<if test='USER_NAME != null and USER_PHONE != null and USER_NAME != "" and USER_PHONE != ""' >
+				USER_ID 
+		</if>
+		<if test='USER_ID != null and USER_EMAIL != null and USER_ID != "" and USER_EMAIL != ""' >
+				USER_PW 
+		</if>
+		FROM CODE_USER 
+		WHERE 1=1 
+		<if test='USER_NAME != null and USER_PHONE != null and USER_NAME != "" and USER_PHONE != ""' >
+			AND USER_NAME  = #{USER_NAME} 
+			AND USER_PHONE = #{USER_PHONE}
+		</if>
+		<if test='USER_ID != null and USER_EMAIL != null and USER_ID != "" and USER_EMAIL != ""' >
+			AND USER_ID  	= #{USER_ID} 
+			AND USER_EMAIL  = #{USER_EMAIL}
+		</if>
 	</select>
 
 </mapper>

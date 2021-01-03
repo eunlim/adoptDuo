@@ -9,9 +9,10 @@ $(function() {
 
 
 	$.ajax({
-        url : "https://limy1118.cafe24.com/adoptDuo/login_post",
+        url : /* "https://limy1118.cafe24.com/adoptDuo/login_post", */
+        	"http://localhost:8080/idChk",
         type : 'POST',
-       	data : {userId : "admin!!!!", userPw : "1234"},
+       	data : {USER_ID:"te66st"},
         success : function(result) {// return이 없을경우 success는
      	  console.log(result)
         },

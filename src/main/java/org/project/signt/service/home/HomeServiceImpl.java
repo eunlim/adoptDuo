@@ -1,7 +1,6 @@
 package org.project.signt.service.home;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,16 +24,29 @@ public class HomeServiceImpl implements HomeService{
 	}
 
 	@Override
-	public int getUserIdChk(HashMap<String, Object> param) {
+	public int getUserIdChk(HashMap<String, Object> param) throws Exception {
 		 HomeDao dao = sqlSession.getMapper(HomeDao.class);
 		 return dao.getUserIdChk(param);
 	}
 
 	@Override
-	public int getUserPwChk(HashMap<String, Object> param) {
+	public int getUserPwChk(HashMap<String, Object> param) throws Exception {
 		 HomeDao dao = sqlSession.getMapper(HomeDao.class);
 		 return dao.getUserPwChk(param);
 	}
+
+	@Override
+	public int insertUser(HashMap<String, Object> param) throws Exception {
+		 HomeDao dao = sqlSession.getMapper(HomeDao.class);
+		return dao.insertUser(param);
+	}
+
+	@Override
+	public HashMap<String, Object> searchInfo(HashMap<String, Object> param) throws Exception {
+		 HomeDao dao = sqlSession.getMapper(HomeDao.class);
+		return dao.searchInfo(param);
+	}
+
 
 	
 	
