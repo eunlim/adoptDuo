@@ -18,12 +18,25 @@ public class MyPageServiceImpl implements MyPageService{
 	@Autowired
 	private SqlSession sqlSession;
 
+
+	@Override
+	public HashMap<String, Object> userInfo(HashMap<String, Object> param) throws Exception {
+		MyPageDao dao = sqlSession.getMapper(MyPageDao.class);
+		return dao.userInfo(param);
+	}
+	
 	@Override
 	public ArrayList<HashMap<String, Object>> userBuyList(HashMap<String, Object> param) throws Exception {
 		 MyPageDao dao = sqlSession.getMapper(MyPageDao.class);
 		 return dao.userBuyList(param);
 	}
-	
+
+	@Override
+	public int userUpdate(HashMap<String, Object> param) throws Exception {
+		 MyPageDao dao = sqlSession.getMapper(MyPageDao.class);
+		return dao.userUpdate(param);
+	}
+
 
 
 	
