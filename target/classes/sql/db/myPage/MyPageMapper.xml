@@ -2,7 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="org.project.signt.dao.myPage.MyPageDao">
 
-	
+	<select id="userInfo" parameterType="HashMap" resultType="HashMap">
+		SELECT  IDX 
+			   ,AUTH_IDX 
+			   ,USER_ID
+			   ,USER_PW
+			   ,USER_NAME
+			   ,USER_PHONE
+			   ,USER_ADDR
+			   ,USER_GRADE
+			   ,USER_REG_DATE
+			   ,USER_EMAIL
+			   ,USER_BIRTH
+		FROM CODE_USER
+		WHERE USER_ID = #{USER_ID}
+	</select>
 	
 	<select id="userBuyList" parameterType="HashMap" resultType="HashMap">
 	 	SELECT  aai.IDX
@@ -22,5 +36,15 @@
 		AND aai.ADOPT_TYPE = 1;
 	</select>
 	
+	<update id="userUpdate"  parameterType="HashMap">
+		UPDATE CODE_USER 
+		   SET 
+		   	    USER_PW 	= #{USER_PW}
+		   	   ,USER_BIRTH  = #{USER_BIRTH}
+		   	   ,USER_PHONE  = #{USER_PHONE}
+		   	   ,USER_ADDR 	= #{USER_ADDR}
+		   	   ,USER_EMAIL	= #{USER_EMAIL}
+		WHERE USER_ID = #{USER_ID}
+	</update>	
 
 </mapper>

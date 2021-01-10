@@ -105,7 +105,7 @@ public class HomeController {
 		
 		HashMap<String, Object> response = new HashMap<String, Object>();
 		
-		response.put("result", homeService.searchInfo(param));
+		response.put("info", homeService.searchInfo(param));
 		
 		return response;
 	}

@@ -38,6 +38,7 @@
 				 ,USER_PHONE 	-- 회원 폰번호
 				 ,USER_ADDR		-- 회원 주소
 				 ,USER_EMAIL	-- 회원 이메일
+				 ,USER_BIRTH	-- 회원 생년월일
 				 )
 				VALUES(
 					(SELECT IFNULL(MAX(IDX)+1, 1) FROM CODE_USER CU) 
@@ -47,6 +48,7 @@
 				   ,#{USER_PHONE}
 				   ,#{USER_ADDR}
 				   ,#{USER_EMAIL}
+				   ,#{USER_BIRTH}
 					)
 	</insert>
 	
