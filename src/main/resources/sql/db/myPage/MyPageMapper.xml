@@ -2,49 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="org.project.signt.dao.myPage.MyPageDao">
 
-	<select id="userInfo" parameterType="HashMap" resultType="HashMap">
-		SELECT  IDX 
-			   ,AUTH_IDX 
-			   ,USER_ID
-			   ,USER_PW
-			   ,USER_NAME
-			   ,USER_PHONE
-			   ,USER_ADDR
-			   ,USER_GRADE
-			   ,USER_REG_DATE
-			   ,USER_EMAIL
-			   ,USER_BIRTH
-		FROM CODE_USER
-		WHERE USER_ID = #{USER_ID}
-	</select>
-	
-	<select id="userBuyList" parameterType="HashMap" resultType="HashMap">
-	 	SELECT  aai.IDX
-			   ,cu.USER_ID 			-- 판매자ID
-			   ,aai.ADOPT_TYPE		-- 분양종류
-			   ,aai.ADOPT_IDX		-- 분양 정보 인덱스 
-			   ,aai.USER_IDX		-- 글등록 IDX
-			   ,aai.ACTIVITY_TYPE	-- 분양활동 ( 거래중, 거래대기, 거래완료)
-			   ,aai.INSERTED_DATE	-- 등록일
-			   ,ai.ADOPT_TITLE 		-- 제목 
-		FROM ADOPT_ACTIVITY_INFO aai
-		INNER JOIN ADOPT_INFO ai 
-		ON aai.ADOPT_IDX = ai.IDX
-		INNER JOIN CODE_USER cu 
-		ON aai.USER_IDX = cu.IDX 
-		WHERE USER_IDX = #{USER_IDX}
-		AND aai.ADOPT_TYPE = 1;
-	</select>
-	
-	<update id="userUpdate"  parameterType="HashMap">
-		UPDATE CODE_USER 
-		   SET 
-		   	    USER_PW 	= #{USER_PW}
-		   	   ,USER_BIRTH  = #{USER_BIRTH}
-		   	   ,USER_PHONE  = #{USER_PHONE}
-		   	   ,USER_ADDR 	= #{USER_ADDR}
-		   	   ,USER_EMAIL	= #{USER_EMAIL}
-		WHERE USER_ID = #{USER_ID}
-	</update>	
+   <select id="userInfo" parameterType="HashMap" resultType="HashMap">
+      SELECT  IDX 
+            ,AUTH_IDX 
+            ,USER_ID
+            ,USER_PW
+            ,USER_NAME
+            ,USER_PHONE
+            ,USER_ADDR
+            ,USER_GRADE
+            ,USER_EMAIL
+            ,DATE_FORMAT(USER_BIRTH, '%Y%m%d') as USER_BIRTH
+      FROM CODE_USER
+      WHERE USER_ID = #{USER_ID}
+   </select>
+   
+   <select id="userBuyList" parameterType="HashMap" resultType="HashMap">
+       SELECT  aai.IDX
+            ,cu.USER_ID          -- 판매자ID
+            ,aai.ADOPT_TYPE      -- 분양종류
+            ,aai.ADOPT_IDX      -- 분양 정보 인덱스 
+            ,aai.USER_IDX      -- 글등록 IDX
+            ,aai.ACTIVITY_TYPE   -- 분양활동 ( 거래중, 거래대기, 거래완료)
+            ,aai.INSERTED_DATE   -- 등록일
+            ,ai.ADOPT_TITLE       -- 제목 
+      FROM ADOPT_ACTIVITY_INFO aai
+      INNER JOIN ADOPT_INFO ai 
+      ON aai.ADOPT_IDX = ai.IDX
+      INNER JOIN CODE_USER cu 
+      ON aai.USER_IDX = cu.IDX 
+      WHERE USER_IDX = #{USER_IDX}
+      AND aai.ADOPT_TYPE = 1;
+   </select>
+   
+   <update id="userUpdate"  parameterType="HashMap">
+      UPDATE CODE_USER 
+         SET 
+                USER_PW    = #{USER_PW}
+               ,USER_BIRTH  = #{USER_BIRTH}
+               ,USER_PHONE  = #{USER_PHONE}
+               ,USER_ADDR    = #{USER_ADDR}
+               ,USER_EMAIL   = #{USER_EMAIL}
+      WHERE USER_ID = #{USER_ID}
+   </update>   
 
 </mapper>
